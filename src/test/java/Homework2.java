@@ -29,39 +29,39 @@ public class Homework2 {
 
     @Test
     public void rgs_test_1() throws InterruptedException{
-        WebElement webElement = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[2]/div[1]/div/div/div/form/div[3]/a"));
+        WebElement webElement = driver.findElement(By.xpath(".//a[@class='kit-link kit-link_color_black region-list__toggler']"));
         webElement.click();
 
         WebDriverWait wait = new WebDriverWait(driver, 3);
 
 
-        WebElement webElement1 = driver.findElement(By.xpath("html/body/div[7]/div/div[2]/div[2]/div/div[1]/div/div[1]/input"));
+        WebElement webElement1 = driver.findElement(By.xpath(".//input[@placeholder='Введите название региона']"));
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("html/body/div[7]/div/div[2]/div[2]/div/div[1]/div/div[1]/input"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//input[@placeholder='Введите название региона']"))));
 
         webElement1.sendKeys("Нижегородская область");
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("html/body/div[8]/div/div/div"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[@data-value='52']"))));
 
-        WebElement webElement2 = driver.findElement(By.xpath("html/body/div[8]/div/div/div"));
+        WebElement webElement2 = driver.findElement(By.xpath(".//div[@data-value='52']"));
 
         webElement2.click();
 
-        WebElement webElement3 = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[3]/div/div"));
+        WebElement webElement3 = driver.findElement(By.xpath(".//div[@class='footer-info']"));
 
         new Actions(driver).moveToElement(webElement3).perform();
 
-        WebElement fb = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/ul/li[1]/a/span"));
+        WebElement fb = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Фейсбук']/span"));
 
-        WebElement tw = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/ul/li[2]/a/span"));
+        WebElement tw = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Твиттер']/span"));
 
-        WebElement yt = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/ul/li[3]/a/span"));
+        WebElement yt = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Ютьюб']/span"));
 
-        WebElement inst = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/ul/li[4]/a/span"));
+        WebElement inst = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Инстаграмм']/span"));
 
-        WebElement vk = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/ul/li[5]/a/span"));
+        WebElement vk = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Вконтакте']/span"));
 
-        WebElement odn = driver.findElement(By.xpath(".//*[@id='main']/div/div/table/tbody/tr/td/div/div/div/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/div/div/ul/li[6]/a/span"));
+        WebElement odn = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Одноклассниках']/span"));
 
         Assert.assertTrue(fb.isEnabled());
 
