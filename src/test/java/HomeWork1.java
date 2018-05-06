@@ -29,10 +29,10 @@ public class HomeWork1 {
 
     @Test
     public void rgs_test_1() throws InterruptedException{
-        WebElement webElement = driver.findElement(By.xpath(".//*[@id='main-navbar-collapse']/ol[1]/li[2]/a"));
+        WebElement webElement = driver.findElement(By.xpath(".//a[@data-toggle='dropdown']"));
         webElement.click();
 
-        WebElement webElement2 = driver.findElement(By.xpath(".//*[@id='rgs-main-menu-insurance-dropdown']/div[1]/div[1]/div/div[1]/div[3]/ul/li[2]/a"));
+        WebElement webElement2 = driver.findElement(By.xpath(".//a[@href='https://www.rgs.ru/products/private_person/health/dms/generalinfo/index.wbp']"));
         webElement2.click();
 
         WebElement title = driver.findElement(By.xpath(".//*[@class='page-header']/span"));
