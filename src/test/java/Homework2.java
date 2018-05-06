@@ -28,7 +28,7 @@ public class Homework2 {
     }
 
     @Test
-    public void rgs_test_1() throws InterruptedException{
+    public void sbt_test_1() throws InterruptedException{
         WebElement webElement = driver.findElement(By.xpath(".//a[@class='kit-link kit-link_color_black region-list__toggler']"));
         webElement.click();
 
