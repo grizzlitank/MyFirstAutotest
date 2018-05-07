@@ -6,12 +6,60 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomeWork1 {
     WebDriver driver;
+
+    @FindBy(xpath = ".//a[@data-toggle='dropdown']")
+    public WebElement insurance;
+
+    @FindBy(xpath = ".//a[@href='https://www.rgs.ru/products/private_person/health/dms/generalinfo/index.wbp']")
+    public WebElement dms;
+
+    @FindBy(xpath = ".//*[@class='page-header']/span")
+    public WebElement titleDms;
+
+    @FindBy(xpath = ".//a[contains(text(), 'Отправить заявку')]")
+    public WebElement sendApp;
+
+    @FindBy(xpath = "//h4/b")
+    public WebElement titleApp;
+
+    @FindBy(name = "LastName")
+    public WebElement lastName;
+
+    @FindBy(name = "FirstName")
+    public WebElement firstName;
+
+    @FindBy(name = "MiddleName")
+    public WebElement middleName;
+
+    @FindBy(name = "Region")
+    public WebElement region;
+
+    @FindBy(xpath = ".//label[contains(text(), 'Телефон')]/following-sibling:: input")
+    public WebElement phone;
+
+    @FindBy(name = "Email")
+    public WebElement email;
+
+    @FindBy(name = "Comment")
+    public WebElement comment;
+
+    @FindBy(xpath = ".//label[contains(text(),'Я согласен')]")
+    public WebElement agreement;
+
+    @FindBy(xpath = ".//*[@id='button-m']")
+    public WebElement button;
+
+    @FindBy(xpath = ".//span[text()='Введите адрес электронной почты']")
+    public WebElement errorMessage;
+
 
     @Before
     public void setUp(){
@@ -27,98 +75,74 @@ public class HomeWork1 {
         driver.quit();
     }
 
+    public void waiting(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void select(WebElement element, String value){
+        Select selectElement = new Select(element);
+        selectElement.selectByValue(value);
+    }
+
+
     @Test
     public void rgs_test_1() throws InterruptedException{
-        WebElement webElement = driver.findElement(By.xpath(".//a[@data-toggle='dropdown']"));
-        webElement.click();
+        PageFactory.initElements(driver, this);
 
-        WebElement webElement2 = driver.findElement(By.xpath(".//a[@href='https://www.rgs.ru/products/private_person/health/dms/generalinfo/index.wbp']"));
-        webElement2.click();
+        insurance.click();
 
-        WebElement title = driver.findElement(By.xpath(".//*[@class='page-header']/span"));
-        Assert.assertEquals("Титульник страницы соответстувет выбору в селекте",
-                "Добровольное медицинское страхование (ДМС)", title.getText());
-
-        WebElement webElement3 = driver.findElement(By.xpath(".//*[@id='rgs-main-context-bar']/div/div/div/a[3]"));
-        webElement3.click();
-
-
-        WebDriverWait wait1 = new WebDriverWait(driver, 3);
-        wait1.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h4/b"))));
-        WebElement title2 = driver.findElement(By.xpath("//h4/b"));
+        dms.click();
 
         Assert.assertEquals("Титульник страницы соответстувет выбору в селекте",
-                "Заявка на добровольное медицинское страхование", title2.getText());
+                "Добровольное медицинское страхование (ДМС)", titleDms.getText());
 
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("LastName"))));
-
-        WebElement webElement4 = driver.findElement(By.name("LastName"));
-
-        webElement4.sendKeys("Иванов");
+        sendApp.click();
 
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[2]/input"))));
+        this.waiting(titleApp);
 
-        WebElement webElement5 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[2]/input"));
-
-        webElement5.sendKeys("Иван");
-
-
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[3]/input"))));
-
-        WebElement webElement6 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[3]/input"));
-
-        webElement6.sendKeys("Иванович");
+        Assert.assertEquals("Титульник страницы соответстувет выбору в селекте",
+                "Заявка на добровольное медицинское страхование", titleApp.getText());
 
 
-        WebElement territoryButton = driver.findElement(By.name("Region"));
-        Select terriotrySelect = new Select(territoryButton);
-        terriotrySelect.selectByValue("77");
+        this.waiting(lastName);
+
+        lastName.sendKeys("Иванов");
 
 
+        this.waiting(firstName);
+
+        firstName.sendKeys("Иван");
 
 
-        WebElement webElement7 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[5]/input"));
+        this.waiting(middleName);
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[5]/input"))));
-
-        webElement7.sendKeys("9999999999");
+        middleName.sendKeys("Иванович");
 
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("Email"))));
-
-        WebElement webElement8 = driver.findElement(By.name("Email"));
-
-        webElement8.sendKeys("qwertyqwerty");
+        this.select(region, "77");
 
 
+        this.waiting(phone);
+
+        phone.sendKeys("99999999999");
 
 
+        this.waiting(email);
+
+        email.sendKeys("qwertyqwerty");
 
 
+        this.waiting(comment);
 
-        WebElement webElement9 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[7]/input"));
-
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[7]/input"))));
-
-        webElement9.sendKeys("20062018");
+        comment.sendKeys("qwertyqwerty");
 
 
+        this.waiting(agreement);
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[8]/textarea"))));
+        agreement.click();
 
-        WebElement webElement10 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[8]/textarea"));
-
-        webElement10.sendKeys("qwertyqwerty");
-
-
-
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[9]/label/label"))));
-
-        WebElement webElement11 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[9]/label/label"));
-
-        webElement11.click();
 
         Assert.assertEquals("Иванов", driver.findElement(By.name("LastName")).getAttribute("value"));
 
@@ -128,34 +152,28 @@ public class HomeWork1 {
 
         Assert.assertEquals("77", driver.findElement(By.name("Region")).getAttribute("value"));
 
-        Assert.assertEquals("+7 (999) 999-99-99", driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[5]/input")).getAttribute("value"));
+        Assert.assertEquals("+7 (999) 999-99-99", driver.findElement(By.xpath(".//label[contains(text(), 'Телефон')]/following-sibling:: input")).getAttribute("value"));
 
         Assert.assertEquals("qwertyqwerty", driver.findElement(By.name("Email")).getAttribute("value"));
-
-        Assert.assertEquals("20.06.2018", driver.findElement(By.name("ContactDate")).getAttribute("value"));
 
         Assert.assertEquals("qwertyqwerty", driver.findElement(By.name("Comment")).getAttribute("value"));
 
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[9]/label/label"))));
+        this.waiting(button);
 
-        WebElement webElement12 = driver.findElement(By.xpath(".//*[@id='button-m']"));
-
-        webElement12.click();
+        button.click();
 
 
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[6]/div/label/span"))));
+        this.waiting(errorMessage);
 
-        WebElement webElement13 = driver.findElement(By.xpath(".//*[@id='applicationForm']/div[2]/div[6]/div/label/span"));
-
-        Assert.assertTrue(webElement13.isEnabled());
+        Assert.assertTrue(errorMessage.isEnabled());
 
 
 
-        webElement8.clear();
+        email.clear();
 
-        webElement8.sendKeys("qwerty@qwerty.ru");
+        email.sendKeys("qwerty@qwerty.ru");
 
 
     }

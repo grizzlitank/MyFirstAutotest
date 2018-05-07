@@ -7,11 +7,44 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Homework2 {
     WebDriver driver;
+
+    @FindBy(xpath = ".//a[@class='kit-link kit-link_color_black region-list__toggler']")
+    public WebElement region;
+
+    @FindBy(xpath = ".//input[@placeholder='Введите название региона']")
+    public WebElement regionFind;
+
+    @FindBy(xpath = ".//div[@data-value='52']")
+    public WebElement regionNO;
+
+    @FindBy(xpath = ".//div[@class='footer-info']")
+    public WebElement footer;
+
+    @FindBy(xpath = ".//a[@aria-label='Поделиться в Фейсбук']/span")
+    public WebElement fb;
+
+    @FindBy(xpath = ".//a[@aria-label='Поделиться в Твиттер']/span")
+    public WebElement tw;
+
+    @FindBy(xpath = ".//a[@aria-label='Поделиться в Ютьюб']/span")
+    public WebElement yt;
+
+    @FindBy(xpath = ".//a[@aria-label='Поделиться в Инстаграмм']/span")
+    public WebElement inst;
+
+    @FindBy(xpath = ".//a[@aria-label='Поделиться в Вконтакте']/span")
+    public WebElement vk;
+
+    @FindBy(xpath = ".//a[@aria-label='Поделиться в Одноклассниках']/span")
+    public WebElement odn;
+
 
     @Before
     public void setUp(){
@@ -27,41 +60,26 @@ public class Homework2 {
         driver.quit();
     }
 
+    public void waiting(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     @Test
     public void sbt_test_1() throws InterruptedException{
-        WebElement webElement = driver.findElement(By.xpath(".//a[@class='kit-link kit-link_color_black region-list__toggler']"));
-        webElement.click();
+        PageFactory.initElements(driver, this);
 
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        region.click();
 
+        this.waiting(regionFind);
 
-        WebElement webElement1 = driver.findElement(By.xpath(".//input[@placeholder='Введите название региона']"));
+        regionFind.sendKeys("Нижегородская область");
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//input[@placeholder='Введите название региона']"))));
+        this.waiting(regionNO);
 
-        webElement1.sendKeys("Нижегородская область");
+        regionNO.click();
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[@data-value='52']"))));
-
-        WebElement webElement2 = driver.findElement(By.xpath(".//div[@data-value='52']"));
-
-        webElement2.click();
-
-        WebElement webElement3 = driver.findElement(By.xpath(".//div[@class='footer-info']"));
-
-        new Actions(driver).moveToElement(webElement3).perform();
-
-        WebElement fb = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Фейсбук']/span"));
-
-        WebElement tw = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Твиттер']/span"));
-
-        WebElement yt = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Ютьюб']/span"));
-
-        WebElement inst = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Инстаграмм']/span"));
-
-        WebElement vk = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Вконтакте']/span"));
-
-        WebElement odn = driver.findElement(By.xpath(".//a[@aria-label='Поделиться в Одноклассниках']/span"));
+        new Actions(driver).moveToElement(footer).perform();
 
         Assert.assertTrue(fb.isEnabled());
 
